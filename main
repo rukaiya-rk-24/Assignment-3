@@ -1,0 +1,161 @@
+Quesn 1.
+vector<vector<int>> threeSum(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> ans;
+        int n=nums.size();
+        for(int i=0;i<n;i++){
+            if(i>0 && nums[i]==nums[i-1]) continue;
+            int j=i+1,k=n-1;
+            while(j<k){
+                int sum=nums[k]+nums[j]+nums[i];
+                if(sum<0) j++;
+                else if(sum>0) k--;
+                else{
+                    vector<int> temp={nums[i],nums[j],nums[k]};
+                    ans.push_back(temp);
+                    j++;
+                    k--;
+                    while(j<k && nums[j]==nums[j-1]) j++;
+                    while(j<k && nums[k]==nums[k+1]) k--;
+                }
+            }
+        }
+        return ans;
+    }
+
+
+Quesn 2.
+vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        sort(nums.begin(),nums.end());
+        if(nums[0]>0 && target==0) return {};
+        vector<vector<int>> ans;
+        int n=nums.size();
+        for(int i=0;i<n;i++){
+            if(i>0 && nums[i]==nums[i-1]) continue;
+            for(int j=i+1;j<n;j++){
+                if(j>i+1 && nums[j]==nums[j-1]) continue;
+                int l=j+1,k=n-1;
+                while(l<k){
+                    long long sum = nums[i];
+                    sum += nums[j];
+                    sum += nums[k];
+                    sum += nums[l];
+                    if(sum==target){
+                        vector<int> temp={nums[i],nums[j],nums[l],nums[k]};
+                        ans.push_back(temp);
+                        l++;
+                        k--;
+                        while(l<k && nums[l]==nums[l-1]) l++;
+                        while(l<k && nums[k]==nums[k+1]) k--;
+                    }
+                    else if(sum<target) l++;
+                    else k--;
+                }
+        }
+        }
+        return ans;
+    }
+
+
+Quesn 3.
+void nextPermutation(vector<int>& nums) {
+        int n = nums.size(), index = -1;
+        for(int i=n-2; i>=0; i--){
+            if(nums[i] < nums[i+1]){
+                index = i;
+                break;
+            }
+        }
+        for(int i=n-1; i>=index && index != -1; i--){
+            if(nums[i] > nums[index]){
+                swap(nums[i], nums[index]);
+                break;
+            }
+        }
+        reverse(nums.begin() + index + 1, nums.end());
+    }
+
+
+Quesn 4.
+int searchInsert(vector<int>& nums, int target) {
+        int start = 0;
+        int end = nums.size();
+        int ans = 0;
+        if(nums[end-1]<target){
+            return end;
+        }
+        while(start<=end){
+            int mid = start+ (end - start)/2;
+            if(nums[mid]==target){
+                return mid;
+            }
+            else if(nums[mid]>target){
+                end = mid - 1;
+            }
+            else{
+                start = mid+1;
+                ans = mid+1;
+            }
+        }
+        return ans;
+    }
+
+
+Quesn 5.
+vector<int> plusOne(vector<int>& digits) {
+        int n=digits.size();
+        vector<int> ans;
+        int carr=1;
+        for(int i=n-1;i>=0;i--){
+            if(digits[i]==9 && carr==1){
+                ans.push_back(0);
+                carr=1;
+            }
+            else{
+                ans.push_back(digits[i]+carr);
+                carr=0;
+            }
+        }
+        if(carr) ans.push_back(carr);
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+
+
+Quesn 6.
+int ans = 0;
+        for(auto i:nums)
+        ans ^= i;
+        return ans;
+
+
+
+Quesn 7.
+void printMissing(
+    int arr[], int n,
+    int low, int high)
+{
+    bool points_of_range[high - low + 1] = { false };
+ 
+    for (int i = 0; i < n; i++) {
+        // if ith element of arr is in
+        // range low to high then mark
+        // corresponding index as true in array
+        if (low <= arr[i] && arr[i] <= high)
+            points_of_range[arr[i] - low] = true;
+    }
+    for (int x = 0; x <= high - low; x++) {
+        if (points_of_range[x] == false)
+            cout << low + x << " ";
+    }
+}
+
+
+
+Quesn 8.
+sort(intervals.begin(), intervals.end());
+for (size_t i = 1; i < intervals.size(); i++) {
+            if (intervals[i - 1].end > intervals[i].start) {
+                return false;
+            }
+        }
